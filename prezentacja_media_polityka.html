@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relacja media a polityka - Prezentacja</title>
+    <style>
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #2c3e50;
+            color: #333;
+        }
+        
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 20px auto;
+            padding: 50px 60px;
+            position: relative;
+            page-break-after: always;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+        
+        .slide-title {
+            color: #fff;
+            font-size: 42px;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #e94560;
+            padding-bottom: 15px;
+        }
+        
+        .slide-subtitle {
+            color: #e94560;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .slide-content {
+            color: #ecf0f1;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .slide-content ul {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        
+        .slide-content li {
+            margin-bottom: 12px;
+        }
+        
+        .slide-content li::marker {
+            color: #e94560;
+        }
+        
+        .title-slide {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .title-slide .main-title {
+            color: #fff;
+            font-size: 52px;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .title-slide .main-title::after {
+            content: '';
+            display: block;
+            width: 200px;
+            height: 4px;
+            background: #e94560;
+            margin: 20px auto;
+        }
+        
+        .title-slide .subtitle {
+            color: #e94560;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .title-slide .authors {
+            color: #bdc3c7;
+            font-size: 22px;
+            margin-top: 30px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .column {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #e94560;
+        }
+        
+        .column h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .column ul {
+            list-style: none;
+            margin: 0;
+        }
+        
+        .column li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .column li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #e94560;
+        }
+        
+        .highlight-box {
+            background: rgba(233, 69, 96, 0.2);
+            border: 2px solid #e94560;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .info-box {
+            background: rgba(46, 204, 113, 0.15);
+            border-left: 4px solid #2ecc71;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .warning-box {
+            background: rgba(241, 196, 15, 0.15);
+            border-left: 4px solid #f1c40f;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e94560;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            position: relative;
+            flex: 1;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #e94560;
+            border-radius: 50%;
+        }
+        
+        .timeline-item span {
+            color: #e94560;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .timeline-item p {
+            color: #bdc3c7;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #bdc3c7;
+            border-left: 4px solid #e94560;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-box .number {
+            font-size: 36px;
+            color: #e94560;
+            font-weight: bold;
+        }
+        
+        .stat-box .label {
+            color: #bdc3c7;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .card h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .card p {
+            color: #bdc3c7;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .footer-text {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: rgba(233, 69, 96, 0.3);
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            color: #ecf0f1;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 15px;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .arrow-list li {
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .arrow-list li::before {
+            content: '→';
+            position: absolute;
+            left: 5px;
+            color: #e94560;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .slide {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLAJD TYTUŁOWY -->
+<div class="slide title-slide">
+    <div class="main-title">Relacja media a polityka</div>
+    <div class="subtitle">Nowe media a dyskurs polityczny</div>
+    <div class="authors">
+        <p>Autorzy: Ilona Sukmanowska i Piotr Wyczyński</p>
+    </div>
+    <div class="slide-number">1/20</div>
+</div>
+
+<!-- SLAJD 2 - SPIS TREŚCI -->
+<div class="slide">
+    <div class="slide-title">Plan prezentacji</div>
+    <div class="slide-content">
+        <div class="two-column">
+            <div class="column">
+                <h3>System medialny</h3>
+                <ul>
+                    <li>System medialny w Polsce</li>
+                    <li>System polityczny po 1989 r.</li>
+                    <li>Reformy po 2015 roku</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Dyskurs polityczny</h3>
+                <ul>
+                    <li>Definicja i podział dyskursu</li>
+                    <li>Dyskurs polityczny vs polityki</li>
+                    <li>Mediatyzacja i jej skutki</li>
+                </ul>
+            </div>
+        </div>
+        <div class="two-column" style="margin-top: 30px;">
+            <div class="column">
+                <h3>Debata medialna</h3>
+                <ul>
+                    <li>Model „dobrej zmiany"</li>
+                    <li>Model zemsty i odwetu</li>
+                    <li>Model mediów obywatelskich</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Nowe media</h3>
+                <ul>
+                    <li>Wpływ na dyskurs polityczny</li>
+                    <li>Zmiana języka polityki</li>
+                    <li>Konsekwencje dla demokracji</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">2/20</div>
+</div>
+
+<!-- SLAJD 3 - SYSTEM MEDIALNY W POLSCE -->
+<div class="slide">
+    <div class="slide-title">1. System medialny w Polsce</div>
+    <div class="slide-subtitle">Charakterystyka struktury medialnej</div>
+    <div class="slide-content">
+        <div class="info-box">
+            <strong>System dualny</strong> — współistnienie mediów publicznych i komercyjnych
+        </div>
+        <ul style="margin-top: 20px; font-size: 20px;">
+            <li>Media publiczne silnie powiązane z polityką od lat 90.</li>
+            <li>Funkcjonowanie uzależnione od aktualnej władzy</li>
+            <li>Pluralizm mediów <strong>nie jest w pełni realizowany</strong></li>
+            <li>Proces urynkowienia ogranicza misję publiczną mediów</li>
+        </ul>
+        <div class="highlight-box">
+            <strong>Dyskurs medialny</strong> kształtowany głównie przez polityków, dziennikarzy i ekspertów — największy wpływ na interpretację rzeczywistości społeczno-politycznej.
+        </div>
+    </div>
+    <div class="slide-number">3/20</div>
+</div>
+
+<!-- SLAJD 4 - PO 1989 -->
+<div class="slide">
+    <div class="slide-title">2. System medialny po 1989 roku</div>
+    <div class="slide-subtitle">Przemiany ustrojowe mediów</div>
+    <div class="slide-content">
+        <div class="timeline">
+            <div class="timeline-item">
+                <span>1989</span>
+                <p>Transformacja mediów państwowych w publiczne</p>
+            </div>
+            <div class="timeline-item">
+                <span>1992</span>
+                <p>Powołanie KRRiT jako organu regulującego</p>
+            </div>
+            <div class="timeline-item">
+                <span>Lata 90.</span>
+                <p>Rozwój mediów komercyjnych</p>
+            </div>
+            <div class="timeline-item">
+                <span>2015+</span>
+                <p>Głębokie reformy systemowe</p>
+            </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 40px;">
+            <strong>Kluczowy problem:</strong> Mimo formalnego pluralizmu, władze mediów publicznych zależą od aktualnej większości parlamentarnej — pełna dojrzałość demokratyczna nie została osiągnięta.
+        </div>
+        <div class="info-box">
+            <strong>KRRiT</strong> — Krajowa Rada Radiofonii i Telewizji: organ regulujący rynek mediów oraz nadzorujący funkcjonowanie radia i telewizji.
+        </div>
+    </div>
+    <div class="slide-number">4/20</div>
+</div>
+
+<!-- SLAJD 5 - REFORMY 2015 -->
+<div class="slide">
+    <div class="slide-title">3. Reformy po 2015 roku</div>
+    <div class="slide-subtitle">Zmiany w strukturze medialnej</div>
+    <div class="slide-content">
+        <div class="two-column">
+            <div class="column">
+                <h3>Działania</h3>
+                <ul>
+                    <li>Przejęcie kontroli nad mediami publicznymi przez rząd</li>
+                    <li>Ograniczenie roli KRRiT</li>
+                    <li>Powołanie Rady Mediów Narodowych</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Skutki</h3>
+                <ul>
+                    <li>Spadek oglądalności TVP (TVP1: 945 tys. → 506 tys.)</li>
+                    <li>Polaryzacja systemu medialnego</li>
+                    <li>Oddalanie się od modelu pluralistycznego (BBC)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="stats" style="margin-top: 30px;">
+            <div class="stat-box">
+                <div class="number">↓46%</div>
+                <div class="label">Spadek oglądalności TVP1</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">Polaryzacja</div>
+                <div class="label">„Za" vs „przeciw" władzy</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">Kryzys</div>
+                <div class="label">Zaufania do mediów publicznych</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">5/20</div>
+</div>
+
+<!-- SLAJD 6 - DYSKURS DEFINICJA -->
+<div class="slide">
+    <div class="slide-title">4. Dyskurs — definicja</div>
+    <div class="slide-subtitle">Sposób komunikacji i wymiany znaczeń w społeczeństwie</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            Dyskurs to nie tylko język, ale także <strong>kontekst społeczny, wartości i relacje między uczestnikami</strong>.
+        </div>
+        <div class="two-column" style="margin-top: 30px;">
+            <div class="column">
+                <h3>Koncepcja lingwistyczna</h3>
+                <p>Dyskurs jako tekst i forma językowa</p>
+            </div>
+            <div class="column">
+                <h3>Koncepcja socjologiczna</h3>
+                <p>Dyskurs jako proces społeczny i forma oddziaływania</p>
+            </div>
+        </div>
+        <div class="info-box" style="margin-top: 30px;">
+            <strong>Odmiany dyskursu (wg M. Czyżewskiego):</strong>
+            <ul style="margin-top: 10px;">
+                <li><strong>Dyskurs publiczny</strong> — przekazy dostępne publicznie (media, instytucje, grupy)</li>
+                <li><strong>Dyskurs polityki</strong> — wypowiedzi elit władzy związane z funkcjami</li>
+                <li><strong>Dyskurs polityczny</strong> — komunikacja elit symbolicznych (polityków i dziennikarzy)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide-number">6/20</div>
+</div>
+
+<!-- SLAJD 7 - DYSKURS POLITYCZNY -->
+<div class="slide">
+    <div class="slide-title">5. Dyskurs polityczny</div>
+    <div class="slide-subtitle">Komunikacja o sprawach politycznych kształtująca rzeczywistość społeczną</div>
+    <div class="slide-content">
+        <div class="two-column">
+            <div class="column">
+                <h3>Styl ideologiczny</h3>
+                <ul>
+                    <li>Uproszczony</li>
+                    <li>Emocjonalny</li>
+                    <li>Nastawiony na przekonywanie</li>
+                    <li>Narzucanie poglądów</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Styl zadaniowy</h3>
+                <ul>
+                    <li>Bardziej realistyczny</li>
+                    <li>Oparty na argumentach</li>
+                    <li>Otwarty na dialog</li>
+                    <li>Skłonny do kompromisu</li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 30px;">
+            <strong>Dwa rodzaje dyskursu współczesnego:</strong>
+            <ul style="margin-top: 10px;">
+                <li><strong>Oficjalny</strong> — tworzony przez media i elity</li>
+                <li><strong>Internetowy</strong> — komentarze i reakcje w mediach społecznościowych</li>
+            </ul>
+        </div>
+        <div class="warning-box">
+            Dyskurs polityczny tworzony jest głównie przez <strong>elity symboliczne</strong> (polityków i media), społeczeństwo pełni częściej rolę odbiorcy.
+        </div>
+    </div>
+    <div class="slide-number">7/20</div>
+</div>
+
+<!-- SLAJD 8 - POLITYKA VS POLITYCZNY -->
+<div class="slide">
+    <div class="slide-title">6. Dyskurs polityki a dyskurs polityczny</div>
+    <div class="slide-subtitle">Kluczowe różnice</div>
+    <div class="slide-content">
+        <table class="comparison-table">
+            <tr>
+                <th>Aspekt</th>
+                <th>Dyskurs polityki</th>
+                <th>Dyskurs polityczny</th>
+            </tr>
+            <tr>
+                <td><strong>Charakter</strong></td>
+                <td>Oficjalny, instytucjonalny, retoryczny</td>
+                <td>Publiczny, medialny, konfrontacyjny, często uproszczony</td>
+            </tr>
+            <tr>
+                <td><strong>Nadawcy</strong></td>
+                <td>Przedstawiciele władzy, parlamentarzyści</td>
+                <td>Politycy, dziennikarze, eksperci, społeczeństwo</td>
+            </tr>
+            <tr>
+                <td><strong>Tematyka</strong></td>
+                <td>Proces legislacyjny, strategia, zarządzanie</td>
+                <td>Walka o władzę, narracje, kształtowanie opinii</td>
+            </tr>
+            <tr>
+                <td><strong>Przykład</strong></td>
+                <td>Przemówienia w Sejmie, exposé premiera</td>
+                <td>Debaty telewizyjne, komentarze w social media</td>
+            </tr>
+        </table>
+        <div class="highlight-box" style="margin-top: 20px;">
+            <strong>Główna różnica:</strong> stopień sformalizowania oraz krąg uczestników
+        </div>
+    </div>
+    <div class="slide-number">8/20</div>
+</div>
+
+<!-- SLAJD 9 - MEDIATYZACJA -->
+<div class="slide">
+    <div class="slide-title">7. Mediatyzacja</div>
+    <div class="slide-subtitle">Rosnąca rola mediów w polityce i życiu społecznym</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            <strong>Mediatyzacja</strong> — proces stopniowego uzależnienia polityki od mediów oraz dostosowywania się polityków do ich zasad działania.
+        </div>
+        <div class="info-box">
+            <strong>Media nie tylko przekazują informacje, ale także:</strong>
+            <ul style="margin-top: 10px;">
+                <li>Selekcjonują treści wydarzeń</li>
+                <li>Kształtują obraz rzeczywistości</li>
+                <li>Wpływają na opinię publiczną</li>
+            </ul>
+        </div>
+        <div class="three-column" style="margin-top: 25px;">
+            <div class="card">
+                <h3>Etap 1</h3>
+                <p>Dostrzeganie znaczenia mediów przez polityków</p>
+            </div>
+            <div class="card">
+                <h3>Etap 2</h3>
+                <p>Wzrost niezależności mediów i ich wpływu</p>
+            </div>
+            <div class="card">
+                <h3>Etap 3-4</h3>
+                <p>Dostosowywanie się polityków → dominacja mediów</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">9/20</div>
+</div>
+
+<!-- SLAJD 10 - WPLYW MEDIATYZACJI -->
+<div class="slide">
+    <div class="slide-title">8. Wpływ mediatyzacji na dyskurs</div>
+    <div class="slide-subtitle">Zmiana komunikacji politycznej</div>
+    <div class="slide-content">
+        <div class="two-column">
+            <div class="column">
+                <h3>Zmiany w komunikacji</h3>
+                <ul>
+                    <li>Większa skrótowość i uproszczenia</li>
+                    <li>Rosnąca kolokwialność języka</li>
+                    <li>Większy nacisk na emocje</li>
+                    <li>Wypowiedzi impulsywne</li>
+                    <li>Zachowania medialne</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Skutki</h3>
+                <ul>
+                    <li>Zjawisko „polityków-celebrytów"</li>
+                    <li>Wizerunek > merytoryka</li>
+                    <li>Rozpoznawalność > kompetencje</li>
+                    <li>Celem: popularność, nie informacja</li>
+                </ul>
+            </div>
+        </div>
+        <div class="warning-box" style="margin-top: 25px;">
+            <strong>Kluczowa zmiana:</strong> Dyskurs polityczny upodabnia się do stylu komunikacji internetowej — szybki, emocjonalny, nastawiony na sensację.
+        </div>
+    </div>
+    <div class="slide-number">10/20</div>
+</div>
+
+<!-- SLAJD 11 - PAUPERYZACJA -->
+<div class="slide">
+    <div class="slide-title">9. Pauperyzacja języka polityki</div>
+    <div class="slide-subtitle">Obniżenie jakości języka w polityce</div>
+    <div class="slide-content">
+        <div class="stats">
+            <div class="stat-box">
+                <div class="number">↓</div>
+                <div class="label">Poziom debaty publicznej</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">↘</div>
+                <div class="label">Dialog i kompromis</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">↑</div>
+                <div class="label">Konflikty i polaryzacja</div>
+            </div>
+        </div>
+        <div class="two-column" style="margin-top: 30px;">
+            <div class="column">
+                <h3>Charakterystyka</h3>
+                <ul>
+                    <li>Język populistyczny</li>
+                    <li>Uproszczone schematy i hasła</li>
+                    <li>Przekazy emocjonalne</li>
+                    <li>Ironia, żart, prowokacja</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Skutki</h3>
+                <ul>
+                    <li>Utrudnienie dialogu</li>
+                    <li>Wzrost konfliktów</li>
+                    <li>Polaryzacja społeczeństwa</li>
+                    <li>Spadek zaufania do polityki</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">11/20</div>
+</div>
+
+<!-- SLAJD 12 - DEBATA 2015-2016 -->
+<div class="slide">
+    <div class="slide-title">10. Debata medialna 2015-2016</div>
+    <div class="slide-subtitle">Nowelizacja ustawy o radiofonii i telewizji</div>
+    <div class="slide-content">
+        <div class="info-box">
+            <strong>Uczestnicy:</strong> politycy różnych partii, dziennikarze, eksperci, komentatorzy
+        </div>
+        <div class="highlight-box" style="margin-top: 25px;">
+            Dyskusja koncentrowała się wokół oceny zmian w mediach publicznych oraz ich roli w demokracji.
+        </div>
+        <div class="three-column" style="margin-top: 25px;">
+            <div class="card">
+                <h3>Model I</h3>
+                <p>Media narodowe i prorządowe</p>
+            </div>
+            <div class="card">
+                <h3>Model II</h3>
+                <p>Media niezależne i demokratyczne</p>
+            </div>
+            <div class="card">
+                <h3>Model III</h3>
+                <p>Media obywatelskie i apolityczne</p>
+            </div>
+        </div>
+        <div class="info-box" style="margin-top: 20px;">
+            <strong>Trzy nowe modele dyskursu:</strong> „dobrej zmiany" | zemsty i odwetu | mediów obywatelskich
+        </div>
+    </div>
+    <div class="slide-number">12/20</div>
+</div>
+
+<!-- SLAJD 13 - DOBRA ZMIANA -->
+<div class="slide">
+    <div class="slide-title">11. Model „dobrej zmiany"</div>
+    <div class="slide-subtitle">Nurt narodowo-konserwatywny</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            Wyraźny podział na <strong>„stary system"</strong> (po 1989) i <strong>„nowy porządek"</strong> (po 2015)
+        </div>
+        <div class="two-column" style="margin-top: 25px;">
+            <div class="column">
+                <h3>Założenia</h3>
+                <ul>
+                    <li>Konieczność głębokich zmian</li>
+                    <li>Krytyka transformacji ustrojowej</li>
+                    <li>Dążenie do „naprawy państwa"</li>
+                    <li>Odwoływanie do wartości narodowych</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Media publiczne</h3>
+                <ul>
+                    <li>Narzędzie realizacji polityki państwa</li>
+                    <li>Środek wpływu na opinię publiczną</li>
+                    <li>Reprezentacja „racji stanu"</li>
+                </ul>
+            </div>
+        </div>
+        <div class="warning-box" style="margin-top: 20px;">
+            W dyskursie dominuje <strong>język walki i konfliktu</strong>: podział na „dobre" vs „złe", przekonanie o reprezentowaniu większości społeczeństwa.
+        </div>
+    </div>
+    <div class="slide-number">13/20</div>
+</div>
+
+<!-- SLAJD 14 - ZEMSTA -->
+<div class="slide">
+    <div class="slide-title">12. Model zemsty i odwetu</div>
+    <div class="slide-subtitle">Krytyczna ocena zmian</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            Koncentracja na <strong>zemście politycznej i zmianie personalnej</strong>, nie na pluralizmie czy trwałych reformach.
+        </div>
+        <div class="info-box" style="margin-top: 25px;">
+            <strong>Charakterystyka:</strong>
+            <ul style="margin-top: 10px;">
+                <li>Media jako narzędzie doraźnych celów propagandowych</li>
+                <li>Nowa legislacja jako tymczasowa — zastąpienie poprzedników „swoimi"</li>
+                <li>Działania sprzeczne z procedurami demokratycznymi</li>
+            </ul>
+        </div>
+        <div class="two-column" style="margin-top: 25px;">
+            <div class="column">
+                <h3>Nurt krytyczny</h3>
+                <p>Koniec mediów publicznych, rynek zdominowany przez komercjalizację, media rządowe zamiast publicznych.</p>
+            </div>
+            <div class="column">
+                <h3>Nurt obronny</h3>
+                <p>Nowi pracownicy są „swoi" i bardziej odpowiedni; media rządowe jako etap przejściowy.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">14/20</div>
+</div>
+
+<!-- SLAJD 15 - MEDIA OBYWATELSKIE -->
+<div class="slide">
+    <div class="slide-title">13. Model mediów obywatelskich</div>
+    <div class="slide-subtitle">Koncepcja medialna oparta na społeczeństwie obywatelskim</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            Media traktowane jako <strong>część społeczeństwa obywatelskiego</strong>, nie narzędzie państwa czy partii.
+        </div>
+        <div class="two-column" style="margin-top: 25px;">
+            <div class="column">
+                <h3>Założenia</h3>
+                <ul>
+                    <li>Pluralizm treści</li>
+                    <li>Demokratyczne zarządzanie</li>
+                    <li>Udział środowisk twórczych, naukowych, NGO</li>
+                    <li>Nadzór z udziałem dziennikarzy, artystów, akademików</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Cele</h3>
+                <ul>
+                    <li>Ochrona wolności obywatelskich</li>
+                    <li>Przeciwdziałanie propagandzie</li>
+                    <li>Służba społeczeństwu, nie partii</li>
+                    <li>Repolonizacja mediów komercyjnych</li>
+                </ul>
+            </div>
+        </div>
+        <div class="info-box" style="margin-top: 20px;">
+            <strong>Postulat repolonizacji:</strong> większość kapitału mediów komercyjnych w rękach polskich właścicieli.
+        </div>
+    </div>
+    <div class="slide-number">15/20</div>
+</div>
+
+<!-- SLAJD 16 - NOWE MEDIA -->
+<div class="slide">
+    <div class="slide-title">14. Nowe media a dyskurs polityczny</div>
+    <div class="slide-subtitle">Fragmentaryzacja przestrzeni dyskursu</div>
+    <div class="slide-content">
+        <div class="highlight-box">
+            Nowe media tworzą <strong>sfragmentaryzowane przestrzenie</strong>, gdzie odbiorcy konsumują treści zgodne z własnymi przekonaniami.
+        </div>
+        <div class="two-column" style="margin-top: 25px;">
+            <div class="column">
+                <h3>Wpływ na społeczeństwo</h3>
+                <ul>
+                    <li>Wzmocnienie podziału prawica–lewica</li>
+                    <li>Brak spójnych rozwiązań systemowych</li>
+                    <li>Poczucie chaosu i nieefektywności</li>
+                    <li>Publiczność staje się ostrożniejsza i sceptyczna</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Kreowanie opinii</h3>
+                <ul>
+                    <li>Narzędzie opinii politycznej i ideologicznej</li>
+                    <li>Upraszczanie złożonych kwestii</li>
+                    <li>Wzmacnianie emocjonalnych reakcji</li>
+                    <li>Wpływ na zachowania wyborcze</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">16/20</div>
+</div>
+
+<!-- SLAJD 17 - KONSEKWENCJE -->
+<div class="slide">
+    <div class="slide-title">15. Konsekwencje dla demokracji</div>
+    <div class="slide-subtitle">Zagrożenia i wyzwania</div>
+    <div class="slide-content">
+        <div class="three-column">
+            <div class="card">
+                <h3>Rywalizacja</h3>
+                <p>Nowe media jako miejsce walki ideologicznej o kontrolę narracji</p>
+            </div>
+            <div class="card">
+                <h3>Postawy</h3>
+                <p>Ksztaltowanie postaw społecznych i decyzji politycznych</p>
+            </div>
+            <div class="card">
+                <h3>Schematy</h3>
+                <p>Utrwalanie schematów partyjnych, ograniczenie debaty</p>
+            </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 30px;">
+            <strong>Bez krytycznej refleksji i pluralistycznego podejścia</strong> media mogą:
+            <ul style="margin-top: 10px;">
+                <li>Ograniczać debatę publiczną</li>
+                <li>Wpływać na kształtowanie świadomości obywatelskiej</li>
+                <li>Zastępować misję mediów rozgrywkami politycznymi</li>
+            </ul>
+        </div>
+        <div class="warning-box" style="margin-top: 15px;">
+            Nowe media to <strong>zarówno kanał informacji, jak i miejsce rywalizacji ideologicznej</strong>.
+        </div>
+    </div>
+    <div class="slide-number">17/20</div>
+</div>
+
+<!-- SLAJD 18 - PODSUMOWANIE -->
+<div class="slide">
+    <div class="slide-title">16. Podsumowanie</div>
+    <div class="slide-subtitle">Kluczowe wnioski</div>
+    <div class="slide-content">
+        <ul class="arrow-list" style="font-size: 20px; margin-top: 20px;">
+            <li>Polski system medialny ma charakter dualny, ale <strong>pluralizm nie jest w pełni realizowany</strong></li>
+            <li>Media publiczne pozostają <strong>silnie powiązane z systemem politycznym</strong></li>
+            <li>Mediatyzacja powoduje <strong>dostosowywanie polityki do zasad mediów</strong></li>
+            <li>Język polityki ulega <strong>pauperyzacji</strong> — uproszczenia, emocje, konfrontacja</li>
+            <li>Nowe media <strong>fragmentaryzują dyskurs</strong> i wzmacniają podziały</li>
+            <li>Debata o mediach publicznych koncentruje się na <strong>trzech modelach</strong>: zmiany, zemsty, obywatelskim</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 30px;">
+            <strong>Główne wyzwanie:</strong> zachowanie pluralizmu i realizacja misji publicznej mediów w warunkach rosnącej polaryzacji i presji politycznej.
+        </div>
+    </div>
+    <div class="slide-number">18/20</div>
+</div>
+
+<!-- SLAJD 19 - ŹRÓDŁA -->
+<div class="slide">
+    <div class="slide-title">17. Źródła</div>
+    <div class="slide-content">
+        <div class="info-box">
+            <strong>Główne źródło:</strong><br>
+            S. Mocek, <em>Władza i media. Dyskurs polityczny wokół mediów politycznych w Polsce. Zoon Politikon</em>, Warszawa 2017
+        </div>
+        <div style="margin-top: 40px; color: #bdc3c7;">
+            <p style="margin-bottom: 15px;"><strong>Materiały dodatkowe:</strong></p>
+            <ul style="line-height: 2;">
+                <li>https://share.google/JpUDoGvEMxjegRHzq</li>
+                <li>https://share.google/5ki9U8TD3eNHMLTKk</li>
+                <li>https://share.google/SXElj1Gx3QqomnbCZ</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide-number">19/20</div>
+</div>
+
+<!-- SLAJD KOŃCOWY -->
+<div class="slide title-slide">
+    <div class="main-title">Dziękuję za uwagę</div>
+    <div class="subtitle">Pytania?</div>
+    <div class="authors" style="margin-top: 60px;">
+        <p>Ilona Sukmanowska i Piotr Wyczyński</p>
+    </div>
+    <div class="slide-number">20/20</div>
+</div>
+
+</body>
+</html>
